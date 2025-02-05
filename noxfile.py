@@ -66,3 +66,14 @@ def venv(session: nox.Session) -> None:
         'uv', 'sync', '--all-groups',
         env={'UV_PROJECT_ENVIRONMENT': '.venv'},
     )  # fmt: skip
+
+
+@nox.session(python=PYTHON)
+def run(session: nox.Session) -> None:
+    """Run the website app."""
+    _install_python_dependencies(session)
+    session.run(
+        'uvicorn',
+        '--reload',
+        '--factory', 'chat_topics.website.app:create_app',
+    )  # fmt: skip
