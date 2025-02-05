@@ -1,0 +1,60 @@
+[project]
+name = "chat-topics"
+version="0"  # required
+requires-python="~=3.13.0"
+
+dependencies = [  # pragma: alphabetize[case-insensitive]
+]
+
+[dependency-groups]
+test = [  # pragma: alphabetize[case-insensitive]
+  "pytest",
+]
+mypy = [  # pragma: alphabetize[case-insensitive]
+  "mypy",
+  "nox",
+]
+
+# Ruff
+# ====
+
+[tool.ruff]
+line-length = 79
+
+# Assume Python 3.9
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [  # pragma: alphabetize
+  "COM812", "ISC001",  # conflicts with formatter
+  "D",  # docstring linting is annoying
+  "Q000", "Q003",  # conflicts with quote-style = "single"
+  "TC003",  # do not require imports in TYPE_CHECKING block
+]
+
+task-tags = [
+  "pragma",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [  # pragma: alphabetize
+  "PLR2004",  # allow comparison to values
+  "S101",  # allow `assert`
+]
+
+[tool.ruff.format]
+quote-style = "single"
+
+# Pytest
+# ======
+
+[tool.pytest.ini_options]
+addopts = [
+  "--strict-markers",
+]
+filterwarnings = [
+  "error::DeprecationWarning",
+  "error::pytest.PytestCollectionWarning",
+]
+xfail_strict = true
