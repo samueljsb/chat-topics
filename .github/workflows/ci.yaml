@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: '3.13'
+
+jobs:
+  requirements:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: wntrblm/nox@main
+      with:
+        python-versions: ${{ env.PYTHON_VERSION }}
+    - run: nox -s compile_requirements
+    - run: git diff --exit-code
+
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: wntrblm/nox@main
+      with:
+        python-versions: ${{ env.PYTHON_VERSION }}
+    - run: nox -s mypy
+
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: wntrblm/nox@main
+      with:
+        python-versions: ${{ env.PYTHON_VERSION }}
+    - run: nox -s test
