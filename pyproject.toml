@@ -4,13 +4,16 @@ version="0"  # required
 requires-python="~=3.13.0"
 
 dependencies = [  # pragma: alphabetize[case-insensitive]
+  "attrs",
   "fastapi",
+  "jinja2",
   "uvicorn[standard]",
 ]
 
 [dependency-groups]
 test = [  # pragma: alphabetize[case-insensitive]
   "pytest",
+  "pytest-asyncio",
 ]
 mypy = [  # pragma: alphabetize[case-insensitive]
   "mypy",
@@ -60,3 +63,6 @@ filterwarnings = [
   "error::pytest.PytestCollectionWarning",
 ]
 xfail_strict = true
+
+# pytest-asyncio
+asyncio_default_fixture_loop_scope = "function"
