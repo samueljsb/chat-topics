@@ -4,6 +4,8 @@ version="0"  # required
 requires-python="~=3.13.0"
 
 dependencies = [  # pragma: alphabetize[case-insensitive]
+  "fastapi",
+  "uvicorn[standard]",
 ]
 
 [dependency-groups]
