@@ -12,12 +12,24 @@ dependencies = [  # pragma: alphabetize[case-insensitive]
 
 [dependency-groups]
 test = [  # pragma: alphabetize[case-insensitive]
+  "covdefaults",
+  "coverage",
   "pytest",
   "pytest-asyncio",
 ]
 mypy = [  # pragma: alphabetize[case-insensitive]
   "mypy",
   "nox",
+]
+
+# Coverage
+# ========
+
+[tool.coverage.run]
+plugins = ["covdefaults"]
+source = [
+  "chat_topics",
+  "tests",
 ]
 
 # Ruff

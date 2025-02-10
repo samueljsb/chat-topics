@@ -51,7 +51,10 @@ def mypy(session: nox.Session) -> None:
 @nox.session(python=PYTHON)
 def test(session: nox.Session) -> None:
     _install_python_dependencies(session, ('test',))
-    session.run('pytest', *session.posargs)
+
+    session.run('coverage', 'erase')
+    session.run('coverage', 'run', '-m', 'pytest', *session.posargs)
+    session.run('coverage', 'report')
 
 
 # Local dev
