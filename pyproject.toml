@@ -37,6 +37,7 @@ select = ["ALL"]
 ignore = [  # pragma: alphabetize
   "COM812", "ISC001",  # conflicts with formatter
   "D",  # docstring linting is annoying
+  "ISC003",  # bad advice -- requires implicit string concatenation
   "Q000", "Q003",  # conflicts with quote-style = "single"
   "TC003",  # do not require imports in TYPE_CHECKING block
 ]
@@ -44,6 +45,9 @@ ignore = [  # pragma: alphabetize
 task-tags = [
   "pragma",
 ]
+
+[tool.ruff.lint.isort]
+force-single-line = true
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = [  # pragma: alphabetize
