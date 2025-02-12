@@ -78,5 +78,24 @@ def run(session: nox.Session) -> None:
     session.run(
         'uvicorn',
         '--reload',
-        '--factory', 'chat_topics.website.app:create_app',
+        '--factory', 'chat_topics.slack_app.app:create_app',
+    )  # fmt: skip
+
+
+@nox.session(python=PYTHON)
+def test_run(session: nox.Session) -> None:
+    _install_python_dependencies(session)
+    session.run(
+        'python', '-c',
+        """\
+import asyncio
+from chat_topics.slack_app import app, slack
+
+reporter = app.create_topic_reporter()
+asyncio.run(
+    reporter.report_topics_for_conversation(
+        slack.Conversation('C08DCLL69LZ', '1739377700.882269')
+    )
+)
+"""
     )  # fmt: skip

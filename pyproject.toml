@@ -6,6 +6,7 @@ requires-python="~=3.13.0"
 dependencies = [  # pragma: alphabetize[case-insensitive]
   "attrs",
   "fastapi",
+  "httpx",
   "jinja2",
   "uvicorn[standard]",
 ]
@@ -16,6 +17,7 @@ test = [  # pragma: alphabetize[case-insensitive]
   "coverage",
   "pytest",
   "pytest-asyncio",
+  "pytest-httpx",
 ]
 mypy = [  # pragma: alphabetize[case-insensitive]
   "mypy",
