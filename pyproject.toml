@@ -16,6 +16,7 @@ test = [  # pragma: alphabetize[case-insensitive]
   "coverage",
   "pytest",
   "pytest-asyncio",
+  "pytest-socket",
 ]
 mypy = [  # pragma: alphabetize[case-insensitive]
   "mypy",
@@ -59,6 +60,9 @@ quote-style = "single"
 [tool.pytest.ini_options]
 addopts = [
   "--strict-markers",
+  # pytest-socket
+  "--disable-socket",
+  "--allow-hosts=127.0.0.1",
 ]
 filterwarnings = [
   "error::DeprecationWarning",
