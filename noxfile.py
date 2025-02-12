@@ -37,6 +37,19 @@ def compile_requirements(session: nox.Session) -> None:
 
 
 @nox.session(python=PYTHON)
+def upgrade_requirements(session: nox.Session) -> None:
+    session.install('uv')
+    session.run(
+        'uv',
+        'lock',
+        '--upgrade',
+        # to avoid a warning about not matching the
+        # "project environment path `.venv`"
+        env={'UV_PROJECT_ENVIRONMENT': session.virtualenv.location},
+    )
+
+
+@nox.session(python=PYTHON)
 def lint(session: nox.Session) -> None:
     session.install('pre-commit')
     session.run('pre-commit', 'run', '--all-files')
