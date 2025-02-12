@@ -12,6 +12,8 @@ dependencies = [  # pragma: alphabetize[case-insensitive]
 
 [dependency-groups]
 test = [  # pragma: alphabetize[case-insensitive]
+  "covdefaults",
+  "coverage",
   "pytest",
   "pytest-asyncio",
 ]
@@ -66,3 +68,13 @@ xfail_strict = true
 
 # pytest-asyncio
 asyncio_default_fixture_loop_scope = "function"
+
+# Coverage
+# ========
+
+[tool.coverage.run]
+plugins = ["covdefaults"]
+source = [
+  "chat_topics",
+  "tests",
+]
