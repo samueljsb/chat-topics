@@ -103,14 +103,13 @@ def _format_message(topics: Collection[Topic]) -> str:
             'Topics to discuss:',
             '',
             *(
-                f'{rank}. {topic.title} ({topic.votes} '
-                + ('vote' if topic.votes == 1 else 'votes')
-                + ')'
+                f"""\
+{rank}. {topic.title} ({topic.votes} {'vote' if topic.votes == 1 else 'votes'})
+"""
                 for rank, topic in enumerate(
                     sorted(topics, key=lambda t: t.votes, reverse=True),
                     start=1,
                 )
             ),
-            '',
         )
     )

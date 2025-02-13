@@ -125,6 +125,13 @@ def test_posts_report_when_triggered(
                     "count": 1
                 }
             ]
+        },
+        {
+            "user": "U1234AB56CD",
+            "type": "message",
+            "ts": "2345678901.234567",
+            "text": "PSC: Some unpopular topic?",
+            "thread_ts": "1234567890.123456"
         }
     ],
     "has_more": false
@@ -169,5 +176,7 @@ def test_posts_report_when_triggered(
 Topics to discuss:
 
 1. Another message (2 votes)
+
+2. PSC: Some unpopular topic? (1 vote)
 """,
     }
