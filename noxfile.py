@@ -93,3 +93,30 @@ def run(session: nox.Session) -> None:
         '--reload',
         '--factory', 'chat_topics.slack_app.app:create_app',
     )  # fmt: skip
+
+
+@nox.session(python=PYTHON)
+def test_run(session: nox.Session) -> None:
+    [thread_url] = session.posargs
+    *_, channel_id, ts_ = thread_url.split('/')
+    ts = f'{ts_[1:-6]}.{ts_[-6:]}'
+
+    _install_python_dependencies(session)
+    session.run(
+        'python', '-c',
+        f"""\
+import asyncio
+import os
+from chat_topics.slack_app import app, client
+
+slack_client = client.SlackClient(
+    auth_token=os.environ['SLACK_AUTH_TOKEN'],
+)
+
+asyncio.run(
+    app.report_topics(
+        app.Conversation({channel_id!r}, {ts!r}), slack_client
+    )
+)
+"""
+    )  # fmt: skip
